@@ -1,7 +1,5 @@
 package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
-import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
-
 import java.util.Objects;
 
 public class Cliente {
@@ -74,23 +72,19 @@ public class Cliente {
 
     public static Cliente get(String dni) {
         Objects.requireNonNull(dni, "El DNI no puede ser nulo.");
-
         return new Cliente("Nombre Valido", dni, "643386336");
     }
 
     @Override
-    public boolean equals(Object obj) {
-
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Cliente cliente = (Cliente) obj;
-
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cliente cliente)) return false;
         return Objects.equals(dni, cliente.dni);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dni);
+        return Objects.hashCode(dni);
     }
 
     @Override
