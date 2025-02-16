@@ -3,7 +3,7 @@ package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 import java.util.Objects;
 
 public record Vehiculo(String marca, String modelo, String matricula) {
-    private static final String ER_MARCA = "[A-ZÁÉÍÓÚÜ]+[a-záéíóúü]*[ |-]?[A-ZÁÉÍÓÚÜ]{0,1}[a-záéíóúü]*" ;
+    private static final String ER_MARCA = "[A-ZÁÉÍÓÚÜ]+[a-záéíóúü]*[ |-]?[A-ZÁÉÍÓÚÜ]?[a-záéíóúü]*" ;
     private static final String ER_MATRICULA = "[0-9]{4}[B-Z(^EIOU)]{3}";
 
 
