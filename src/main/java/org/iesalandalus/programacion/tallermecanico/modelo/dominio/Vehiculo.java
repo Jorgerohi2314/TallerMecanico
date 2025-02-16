@@ -7,13 +7,10 @@ public record Vehiculo(String marca, String modelo, String matricula) {
     private static final String ER_MATRICULA = "\\d{4}[B-Z(^EIOU)]{3}";
 
 
-    public Vehiculo(String marca, String modelo, String matricula) {
+    public Vehiculo {
         validadMarca(marca);
         validarMatricula(matricula);
         validarModelo(modelo);
-        this.marca = marca;
-        this.modelo = modelo;
-        this.matricula = matricula;
     }
 
     private void validadMarca(String marca) {
