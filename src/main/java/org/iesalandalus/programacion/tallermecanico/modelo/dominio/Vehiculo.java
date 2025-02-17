@@ -3,7 +3,7 @@ package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 import java.util.Objects;
 
 public record Vehiculo(String marca, String modelo, String matricula) {
-    private static final String ER_MARCA = "[A-ZÁÉÍÓÚÜ]+[a-záéíóúü]*[ |-]?[A-ZÁÉÍÓÚÜ]?[a-záéíóúü]*" ;
+    private static final String ER_MARCA = "[A-ZÁÉÍÓÚÜ]+[a-záéíóúü]*[ |-]?[A-ZÁÉÍÓÚÜ]?[a-záéíóúü]*";
     private static final String ER_MATRICULA = "\\d{4}[B-Z(^EIOU)]{3}";
 
 
@@ -35,7 +35,6 @@ public record Vehiculo(String marca, String modelo, String matricula) {
     }
 
     public static Vehiculo get(String matricula) {
-        Objects.requireNonNull(matricula, "La matrícula no puede ser nula.");
         return new Vehiculo("Audi", "A4", matricula);
     }
 
