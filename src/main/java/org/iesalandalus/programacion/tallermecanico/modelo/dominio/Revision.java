@@ -4,7 +4,6 @@ import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepci
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
@@ -83,21 +82,21 @@ public class Revision {
         return horas;
     }
 
-    public void anadirHoras(int horas) {
-        if (precioMaterial <= 0) {
+    public void anadirHoras(int cantidad) {
+        if (cantidad <= 0) {
             throw new IllegalArgumentException("Las horas no puede ser negativas o 0.");
         }
-        horas += getHoras();
+        horas += cantidad;
     }
     public float getPrecioMaterial() {
         return precioMaterial;
     }
 
-    public void anadirPrecioMaterial(float precioMaterial) {
-        if (precioMaterial <= 0) {
+    public void anadirPrecioMaterial(float cantidad) {
+        if (cantidad <= 0) {
             throw new IllegalArgumentException("El precio no puede ser negativo o 0.");
         }
-     precioMaterial += getPrecioMaterial();
+     precioMaterial += cantidad;
     }
 
     public boolean estaCerrada() {
@@ -112,8 +111,7 @@ public class Revision {
     }
 
     public float getPrecio() {
-        float precio = (getHoras() * PRECIO_HORA) + (getDias() * PRECIO_DIA) + (getPrecioMaterial()*PRECIO_MATERIAL);
-        return precio;
+        return (getHoras() * PRECIO_HORA) + (getDias() * PRECIO_DIA) + (getPrecioMaterial()*PRECIO_MATERIAL);
     }
 
     public float getDias() {
