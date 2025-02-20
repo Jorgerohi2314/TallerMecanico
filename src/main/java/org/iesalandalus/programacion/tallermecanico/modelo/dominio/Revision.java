@@ -24,13 +24,20 @@ public class Revision {
         setCliente(cliente);
         setVehiculo(vehiculo);
         setFechaInicio(fechaInicio);
+        fechaFin = null;
+        horas = 0;
+        precioMaterial = 0;
+
     }
 
     public Revision(Revision revision) {
         Objects.requireNonNull(revision, "La revisión no puede ser nula.");
-        this.setCliente(revision.cliente);
-        this.setVehiculo(revision.vehiculo);
-        this.setFechaInicio(revision.fechaInicio);
+        cliente = new Cliente(revision.cliente);
+        vehiculo = revision.vehiculo;
+        fechaInicio = revision.fechaInicio;
+        fechaFin = revision.fechaFin;
+        horas = revision.getHoras();
+        precioMaterial = revision.getPrecioMaterial();
 
     }
 
@@ -70,7 +77,7 @@ public class Revision {
 
     private void setFechaFin(LocalDate fechaFin) {
         Objects.requireNonNull(fechaFin, "La fecha de fin no puede ser nula.");
-        if (fechaFin.isBefore(fechaInicio) || fechaFin.isEqual(fechaInicio)) {
+        if (fechaFin.isBefore(fechaInicio)) {
             throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
         }
         if (fechaFin.isAfter(LocalDate.now())) {
@@ -119,11 +126,11 @@ public class Revision {
     }
 
     public float getPrecio() {
-        return (getHoras() * PRECIO_HORA) + (getDias() * PRECIO_DIA) + (getPrecioMaterial()*PRECIO_MATERIAL);
+        return (getHoras() * PRECIO_HORA) + (getDias() * PRECIO_DIA) + (getPrecioMaterial() * PRECIO_MATERIAL);
     }
 
     public float getDias() {
-        return ChronoUnit.DAYS.between(fechaInicio, fechaFin);
+       return estaCerrada() ? ChronoUnit.DAYS.between(fechaInicio, fechaFin) : 0;
     }
 
     @Override
@@ -139,14 +146,10 @@ public class Revision {
 
     @Override
     public String toString() {
-        String cadenaFechaFin;
         if (!estaCerrada()) {
-            cadenaFechaFin = "";
-            return String.format("%s - %s: (%s - %s), %s horas, %.2f € en material", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA),cadenaFechaFin, horas, precioMaterial);
-
+            return String.format("%s - %s: (%s - ), %s horas, %.2f € en material", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA),  horas, precioMaterial);
         } else {
-           cadenaFechaFin = fechaFin.format(FORMATO_FECHA);
-            return String.format("%s - %s: (%s - %s), %s horas, %.2f € en material, %.2f € total", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA),cadenaFechaFin, horas, precioMaterial, getPrecio());
+            return String.format("%s - %s: (%s - %s), %s horas, %.2f € en material, %.2f € total", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA),fechaFin.format((FORMATO_FECHA)), horas, precioMaterial, getPrecio());
 
         }
     }
