@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8b0e04e-6981-41d9-b2bd-c9ae382a0816" name="Changes" comment="Errata en cliente.&#10;Clase revision pasa todos los tests.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/tallermecanico/modelo/negocio/Clientes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,6 +98,7 @@
     "Gradle.Tests in 'org.iesalandalus.programacion.tallermecanico.modelo'.executor": "Run",
     "JUnit.ClienteTest.constructorNombreNoValidoDniValidoTelefonoValidoLanzaExcepcion.executor": "Run",
     "JUnit.ClienteTest.executor": "Run",
+    "JUnit.ClientesTest.executor": "Run",
     "JUnit.RevisionTest.constructorRevisionValidaCopiaRevisionCorrectamente.executor": "Run",
     "JUnit.RevisionTest.executor": "Run",
     "JUnit.VehiculoTest.executor": "Run",
@@ -146,7 +148,7 @@
       <recent name="org.iesalandalus.programacion.tallermecanico.modelo.dominio" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RevisionTest">
+  <component name="RunManager" selected="JUnit.ClientesTest">
     <configuration name="ClienteTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TallerMecanico.test" />
       <extension name="coverage">
@@ -162,18 +164,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClienteTest.constructorNombreNoValidoDniValidoTelefonoValidoLanzaExcepcion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClientesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TallerMecanico.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.iesalandalus.programacion.tallermecanico.modelo.dominio.*" />
+          <option name="PATTERN" value="org.iesalandalus.programacion.tallermecanico.modelo.negocio.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.iesalandalus.programacion.tallermecanico.modelo.dominio" />
-      <option name="MAIN_CLASS_NAME" value="org.iesalandalus.programacion.tallermecanico.modelo.dominio.ClienteTest" />
-      <option name="METHOD_NAME" value="constructorNombreNoValidoDniValidoTelefonoValidoLanzaExcepcion(java.lang.String)" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="org.iesalandalus.programacion.tallermecanico.modelo.negocio" />
+      <option name="MAIN_CLASS_NAME" value="org.iesalandalus.programacion.tallermecanico.modelo.negocio.ClientesTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -225,19 +226,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="JUnit.ClientesTest" />
       <item itemvalue="JUnit.RevisionTest.constructorRevisionValidaCopiaRevisionCorrectamente" />
       <item itemvalue="JUnit.RevisionTest" />
       <item itemvalue="JUnit.VehiculoTest" />
       <item itemvalue="JUnit.ClienteTest" />
-      <item itemvalue="JUnit.ClienteTest.constructorNombreNoValidoDniValidoTelefonoValidoLanzaExcepcion" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ClientesTest" />
         <item itemvalue="JUnit.RevisionTest" />
         <item itemvalue="JUnit.VehiculoTest" />
         <item itemvalue="JUnit.RevisionTest.constructorRevisionValidaCopiaRevisionCorrectamente" />
         <item itemvalue="JUnit.ClienteTest" />
-        <item itemvalue="JUnit.ClienteTest.constructorNombreNoValidoDniValidoTelefonoValidoLanzaExcepcion" />
       </list>
     </recent_temporary>
   </component>
@@ -322,7 +323,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740058616322</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Errata en cliente.&#10;Clase revision pasa todos los tests.">
+      <option name="closed" value="true" />
+      <created>1740058676491</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1740058676491</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
