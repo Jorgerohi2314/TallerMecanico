@@ -29,15 +29,15 @@ public class Clientes {
 
     public Cliente modificar(Cliente cliente, String nombre, String telefono) throws TallerMecanicoExcepcion {
         Objects.requireNonNull(cliente, "No se puede modificar un cliente nulo.");
-
         if (!listaClientes.contains(cliente)) {
             throw new TallerMecanicoExcepcion("No existe ningún cliente con ese DNI.");
         }
-        if (nombre.trim().isEmpty() || telefono.trim().isEmpty()) {
-            throw new IllegalArgumentException("El telefono o el nombre estan en blanco");
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            cliente.setNombre(nombre);
         }
-        cliente.setNombre(nombre);
-        cliente.setTelefono(telefono);
+        if (telefono != null && !telefono.trim().isEmpty()) {
+            cliente.setTelefono(telefono);
+        }
         return cliente;
     }
 
