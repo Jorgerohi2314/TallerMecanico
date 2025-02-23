@@ -17,7 +17,7 @@ public class Vehiculos {
     }
 
     public List<Vehiculo> get() {
-        return listaVehiculos;
+        return new ArrayList<>(listaVehiculos);
     }
 
     public void insertar(Vehiculo vehiculo) throws TallerMecanicoExcepcion {
