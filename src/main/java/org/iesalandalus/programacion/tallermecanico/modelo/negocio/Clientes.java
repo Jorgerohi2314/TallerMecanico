@@ -16,7 +16,7 @@ public class Clientes {
     }
 
     public List<Cliente> get() {
-        return listaClientes;
+        return new ArrayList<>(listaClientes);
     }
 
     public void insertar(Cliente cliente) throws TallerMecanicoExcepcion {
