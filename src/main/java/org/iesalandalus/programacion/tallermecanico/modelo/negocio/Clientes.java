@@ -9,27 +9,27 @@ import java.util.Objects;
 
 public class Clientes {
 
-    private List<Cliente> listaClientes;
+    private List<Cliente> coleccionClientes;
 
     public Clientes() {
-        listaClientes = new ArrayList<>();
+        coleccionClientes = new ArrayList<>();
     }
 
     public List<Cliente> get() {
-        return new ArrayList<>(listaClientes);
+        return new ArrayList<>(coleccionClientes);
     }
 
     public void insertar(Cliente cliente) throws TallerMecanicoExcepcion {
         Objects.requireNonNull(cliente, "No se puede insertar un cliente nulo.");
-        if (listaClientes.contains(cliente)) {
+        if (coleccionClientes.contains(cliente)) {
             throw new TallerMecanicoExcepcion("Ya existe un cliente con ese DNI.");
         }
-        listaClientes.add(cliente);
+        coleccionClientes.add(cliente);
     }
 
     public Cliente modificar(Cliente cliente, String nombre, String telefono) throws TallerMecanicoExcepcion {
         Objects.requireNonNull(cliente, "No se puede modificar un cliente nulo.");
-        if (!listaClientes.contains(cliente)) {
+        if (!coleccionClientes.contains(cliente)) {
             throw new TallerMecanicoExcepcion("No existe ningún cliente con ese DNI.");
         }
         if (nombre != null && !nombre.trim().isEmpty()) {
@@ -43,14 +43,14 @@ public class Clientes {
 
     public Cliente buscar(Cliente cliente) {
         Objects.requireNonNull(cliente, "No se puede buscar un cliente nulo.");
-        return listaClientes.contains(cliente) ? cliente : null;
+        return coleccionClientes.contains(cliente) ? cliente : null;
     }
 
     public void borrar(Cliente cliente) throws TallerMecanicoExcepcion {
         Objects.requireNonNull(cliente, "No se puede borrar un cliente nulo.");
-        if (!listaClientes.contains(cliente)) {
+        if (!coleccionClientes.contains(cliente)) {
             throw new TallerMecanicoExcepcion("No existe ningún cliente con ese DNI.");
         }
-        listaClientes.remove(cliente);
+        coleccionClientes.remove(cliente);
     }
 }
