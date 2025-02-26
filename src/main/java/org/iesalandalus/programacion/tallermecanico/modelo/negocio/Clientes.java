@@ -32,10 +32,10 @@ public class Clientes {
         if (!coleccionClientes.contains(cliente)) {
             throw new TallerMecanicoExcepcion("No existe ningún cliente con ese DNI.");
         }
-        if (nombre != null && !nombre.trim().isEmpty()) {
+        if (nombre != null && !nombre.isBlank()) {
             cliente.setNombre(nombre);
         }
-        if (telefono != null && !telefono.trim().isEmpty()) {
+        if (telefono != null && !telefono.isBlank()) {
             cliente.setTelefono(telefono);
         }
         return cliente;
