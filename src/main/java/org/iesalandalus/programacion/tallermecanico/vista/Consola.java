@@ -3,8 +3,11 @@ package org.iesalandalus.programacion.tallermecanico.vista;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.utilidades.Entrada;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 public class Consola {
@@ -37,22 +40,32 @@ public class Consola {
 
     private int leerEntero(String mensaje) {
         Objects.requireNonNull(mensaje, "El mensaje no puede ser nulo");
-        return 1;
+        System.out.println(mensaje);
+        return Entrada.entero();
     }
 
     private float leerReal(String mensaje) {
         Objects.requireNonNull(mensaje, "El mensaje no puede ser entero");
-        return 1f;
+        return Entrada.real();
     }
 
     private String leerCadena(String mensaje) {
         Objects.requireNonNull(mensaje, "El mensaje no puede ser entero");
-        return mensaje;
+        return Entrada.cadena() ;
     }
 
     private LocalDate leerFecha(String mensaje) {
         Objects.requireNonNull(mensaje, "El mensaje no puede ser entero");
-        return LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(CADENA_FORMATO_FECHA);
+        while (true) {
+            System.out.print(mensaje);
+            String fechaStr = Entrada.cadena();
+            try {
+                return LocalDate.parse(fechaStr, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato de fecha inválido. Usa el formato dd/MM/yyyy.");
+            }
+        }
     }
 
     public Cliente leerCliente() {
@@ -95,15 +108,15 @@ public class Consola {
     }
 
     public int leerHoras() {
-        return 1;
+        return leerEntero("Introduce el numero de horas");
     }
 
     public float leerPrecioMaterial() {
-        return 1f;
+        return leerReal("Introduce el precio del material");
     }
 
-    public LocalDate leerFecha() {
-        return LocalDate.now();
+    public LocalDate leerFechaCierre() {
+        return leerFecha("Introduce la fecha de cierre");
     }
 
 }
