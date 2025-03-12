@@ -8,7 +8,6 @@ import org.iesalandalus.programacion.utilidades.Entrada;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Objects;
 
 public class Consola {
 
@@ -30,42 +29,42 @@ public class Consola {
     }
 
     public Opcion elegirOpcion() {
-        int numeroOpcion;
+        Opcion opcion = null;
         do {
-            numeroOpcion = leerEntero("Elige una opción: ");
-        } while (!Opcion.esValida(numeroOpcion));
-        return Opcion.get(numeroOpcion);
-
+            try {
+                opcion = Opcion.get(leerEntero("\nElige una opción: "));
+            } catch (IllegalArgumentException e) {
+                System.out.printf("Error: %s%n", e.getMessage());
+            }
+        } while (opcion == null);
+        return opcion;
     }
 
     private int leerEntero(String mensaje) {
-        Objects.requireNonNull(mensaje, "El mensaje no puede ser nulo");
         System.out.println(mensaje);
         return Entrada.entero();
     }
 
     private float leerReal(String mensaje) {
-        Objects.requireNonNull(mensaje, "El mensaje no puede ser entero");
+        System.out.println(mensaje);
         return Entrada.real();
     }
 
     private String leerCadena(String mensaje) {
-        Objects.requireNonNull(mensaje, "El mensaje no puede ser entero");
+        System.out.println(mensaje);
         return Entrada.cadena() ;
     }
 
     private LocalDate leerFecha(String mensaje) {
-        Objects.requireNonNull(mensaje, "El mensaje no puede ser entero");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(CADENA_FORMATO_FECHA);
-        while (true) {
-            System.out.print(mensaje);
-            String fechaStr = Entrada.cadena();
-            try {
-                return LocalDate.parse(fechaStr, formatter);
-            } catch (DateTimeParseException e) {
-                System.out.println("Formato de fecha inválido. Usa el formato dd/MM/yyyy.");
-            }
+        LocalDate fecha;
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern(CADENA_FORMATO_FECHA);
+        mensaje = String.format("%s (%s)", mensaje, CADENA_FORMATO_FECHA);
+        try {
+            fecha = LocalDate.parse(leerCadena(mensaje), formatoFecha);
+        } catch (DateTimeParseException e) {
+            fecha = null;
         }
+        return fecha;
     }
 
     public Cliente leerCliente() {
@@ -76,8 +75,7 @@ public class Consola {
     }
 
     public Cliente leerClienteDni() {
-        String dni = leerCadena("Introduce el dni que quieres leer");
-        return Cliente.get(dni);
+        return Cliente.get(leerCadena("Introduce el dni que quieres leer"));
     }
 
     public String leerNuevoNombre() {
@@ -96,8 +94,7 @@ public class Consola {
     }
 
     public Vehiculo leerVehiculoMatricula() {
-        String matricula = leerCadena("Introduce la matricula del vehículo que te interesa");
-        return Vehiculo.get(matricula);
+        return Vehiculo.get(leerCadena("Introduce la matricula del vehículo que te interesa"));
     }
 
     public Revision leerRevision() {
@@ -118,5 +115,4 @@ public class Consola {
     public LocalDate leerFechaCierre() {
         return leerFecha("Introduce la fecha de cierre");
     }
-
 }
