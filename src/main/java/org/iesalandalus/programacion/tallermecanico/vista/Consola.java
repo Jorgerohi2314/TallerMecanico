@@ -16,19 +16,19 @@ public class Consola {
 
     private Consola() {}
 
-    public void mostarCabecera(String mensaje) {
+    public static void mostarCabecera(String mensaje) {
         System.out.println(mensaje);
         System.out.println("-".repeat(mensaje.length()));
     }
 
-    public void mostrarMenu() {
+    public static void mostrarMenu() {
         mostarCabecera("Taller mecanico: Gestion de Clientes, vehiculos y revisiones.");
         for (Opcion opcion : Opcion.values()) {
             System.out.println(opcion);
         }
     }
 
-    public Opcion elegirOpcion() {
+    public static Opcion elegirOpcion() {
         Opcion opcion = null;
         do {
             try {
@@ -40,7 +40,7 @@ public class Consola {
         return opcion;
     }
 
-    private int leerEntero(String mensaje) {
+    private static int leerEntero(String mensaje) {
         System.out.println(mensaje);
         return Entrada.entero();
     }
@@ -50,12 +50,12 @@ public class Consola {
         return Entrada.real();
     }
 
-    private String leerCadena(String mensaje) {
+    private static String leerCadena(String mensaje) {
         System.out.println(mensaje);
         return Entrada.cadena() ;
     }
 
-    private LocalDate leerFecha(String mensaje) {
+    private static LocalDate leerFecha(String mensaje) {
         LocalDate fecha;
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern(CADENA_FORMATO_FECHA);
         mensaje = String.format("%s (%s)", mensaje, CADENA_FORMATO_FECHA);
@@ -67,14 +67,14 @@ public class Consola {
         return fecha;
     }
 
-    public Cliente leerCliente() {
+    public static Cliente leerCliente() {
         String nombre = leerCadena("Introduce el nombre");
         String dni = leerCadena("Introduce el DNI.");
         String telefono = leerCadena("Introduce el telefono");
         return new Cliente(nombre, dni, telefono);
     }
 
-    public Cliente leerClienteDni() {
+    public static Cliente leerClienteDni() {
         return Cliente.get(leerCadena("Introduce el dni que quieres leer"));
     }
 
@@ -86,18 +86,18 @@ public class Consola {
         return leerCadena("Introduce en nuevo telefono.");
     }
 
-    public Vehiculo leerVehiculo() {
+    public static Vehiculo leerVehiculo() {
         String marca = leerCadena("Introduce la marca");
         String modelo = leerCadena("Introduce el modelo");
         String matricula = leerCadena("Introduce la matricula");
         return new Vehiculo(marca, modelo, matricula);
     }
 
-    public Vehiculo leerVehiculoMatricula() {
+    public static Vehiculo leerVehiculoMatricula() {
         return Vehiculo.get(leerCadena("Introduce la matricula del vehículo que te interesa"));
     }
 
-    public Revision leerRevision() {
+    public static Revision leerRevision() {
         LocalDate fechaInicio = leerFecha("Introduce la fecha de inicio.");
         Cliente cliente = leerClienteDni();
         Vehiculo vehiculo = leerVehiculoMatricula();
