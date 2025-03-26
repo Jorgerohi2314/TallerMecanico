@@ -16,13 +16,13 @@ public class Consola {
 
     private Consola() {}
 
-    public static void mostarCabecera(String mensaje) {
+    public static void mostrarCabecera(String mensaje) {
         System.out.println(mensaje);
         System.out.println("-".repeat(mensaje.length()));
     }
 
     public static void mostrarMenu() {
-        mostarCabecera("Taller mecanico: Gestion de Clientes, vehiculos y revisiones.");
+        mostrarCabecera("Taller mecanico: Gestion de Clientes, vehiculos y revisiones.");
         for (Opcion opcion : Opcion.values()) {
             System.out.println(opcion);
         }
@@ -45,7 +45,7 @@ public class Consola {
         return Entrada.entero();
     }
 
-    private float leerReal(String mensaje) {
+    private static float leerReal(String mensaje) {
         System.out.println(mensaje);
         return Entrada.real();
     }
@@ -78,11 +78,11 @@ public class Consola {
         return Cliente.get(leerCadena("Introduce el dni que quieres leer"));
     }
 
-    public String leerNuevoNombre() {
+    public static String leerNuevoNombre() {
         return leerCadena("Introduce el nuevo Nombre");
     }
 
-    public String leerNuevoTelefono() {
+    public static String leerNuevoTelefono() {
         return leerCadena("Introduce en nuevo telefono.");
     }
 
@@ -104,15 +104,15 @@ public class Consola {
         return new Revision(cliente, vehiculo, fechaInicio);
     }
 
-    public int leerHoras() {
+    public static int leerHoras() {
         return leerEntero("Introduce el numero de horas");
     }
 
-    public float leerPrecioMaterial() {
+    public static float leerPrecioMaterial() {
         return leerReal("Introduce el precio del material");
     }
 
-    public LocalDate leerFechaCierre() {
+    public static LocalDate leerFechaCierre() {
         return leerFecha("Introduce la fecha de cierre");
     }
 }
