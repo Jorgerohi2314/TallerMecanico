@@ -24,20 +24,31 @@ public abstract class Trabajo {
         setCliente(cliente);
         setVehiculo(vehiculo);
         setFechaInicio(fechaInicio);
+        fechaFin = null;
+        horas = 0;
     }
 
     public Trabajo(Trabajo trabajo) {
-        Objects.requireNonNull(trabajo, "La revisión no puede ser nula.");
+        Objects.requireNonNull(trabajo, "El trabajo no puede ser nulo.");
         cliente = new Cliente(trabajo.cliente);
         vehiculo = trabajo.vehiculo;
         fechaInicio = trabajo.fechaInicio;
+        fechaFin = trabajo.fechaFin;
+        horas = trabajo.getHoras();
     }
 
-    public Trabajo copiar(Trabajo trabajo) {
-        return trabajo;
+    public static Trabajo copiar(Trabajo trabajo) {
+        Objects.requireNonNull(trabajo, "El trabajo no puede ser nulo.");
+        if (trabajo instanceof Revision) {
+            return new Revision((Revision)trabajo);
+        } else if (trabajo instanceof Mecanico) {
+            return new Mecanico((Mecanico)trabajo);
+        }
+        throw new IllegalArgumentException("Tipo de trabajo desconocido");
     }
 
-    public Trabajo get (Vehiculo vehiculo) {
+    public static Trabajo get(Vehiculo vehiculo) {
+        return new Revision(Cliente.get("12345678Q"), vehiculo, LocalDate.now());
     }
 
     public Cliente getCliente() {
@@ -94,7 +105,7 @@ public abstract class Trabajo {
             throw new IllegalArgumentException("Las horas a añadir deben ser mayores que cero.");
         }
         if (estaCerrado()) {
-            throw new TallerMecanicoExcepcion("No se puede añadir horas, ya que la revisión está cerrada.");
+            throw new TallerMecanicoExcepcion("No se puede añadir horas, ya que el trabajo está cerrado.");
         }
         horas += cantidad;
     }
@@ -105,20 +116,34 @@ public abstract class Trabajo {
 
     public void cerrar(LocalDate fechaFin) throws TallerMecanicoExcepcion{
         if (estaCerrado()) {
-            throw new TallerMecanicoExcepcion("La revisión ya está cerrada.");
+            throw new TallerMecanicoExcepcion("El trabajo ya está cerrado.");
         }
         setFechaFin(fechaFin);
     }
 
     public float getPrecio() {
-        return ();
+        return getPrecioFijo() + getPrecioEspecifico();
     }
 
     private float getPrecioFijo() {
-
+        return FACTOR_DIA * getDias();
     }
 
-    public float getDias() {
+
+    private float getDias() {
         return estaCerrado() ? ChronoUnit.DAYS.between(fechaInicio, fechaFin) : 0;
+    }
+
+    public abstract float getPrecioEspecifico();
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Trabajo trabajo)) return false;
+        return Objects.equals(cliente, trabajo.cliente) && Objects.equals(vehiculo, trabajo.vehiculo) && Objects.equals(fechaInicio, trabajo.fechaInicio);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cliente, vehiculo, fechaInicio);
     }
 }

@@ -8,7 +8,7 @@ public enum Opcion {
     BUSCAR_CLIENTE(12, "Buscar un cliente"),
     BORRAR_CLIENTE(13, "Borrar un cliente"),
     LISTAR_CLIENTES(14, "Listar todos los clientes"),
-    MODIFICAR_CLIENTES(21, "Modificar un cliente"),
+    MODIFICAR_CLIENTES(15, "Modificar un cliente"),
     INSERTAR_VEHICULO(21, "Insertar un vehículo"),
     BUSCAR_VEHICULO(23, "Buscar un vehículo"),
     BORRAR_VEHICULO(24, "Borrar un vehículo"),
