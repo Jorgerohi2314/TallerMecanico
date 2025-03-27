@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 public class Mecanico extends Trabajo {
 
-    private static final float FACTOR_HORA = 1.5F;
-    private static final float FACTOR_PRECIO_MATERIAL = 3F;
+    private static final float FACTOR_HORA = 30F;
+    private static final float FACTOR_PRECIO_MATERIAL = 1.5F;
     private float precioMaterial;
 
     public Mecanico(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio) {
@@ -28,7 +28,7 @@ public class Mecanico extends Trabajo {
             throw new IllegalArgumentException("El precio del material a añadir debe ser mayor que cero.");
         }
         if (estaCerrado()) {
-            throw new TallerMecanicoExcepcion("No se puede añadir precio del material, ya que la revisión está cerrada.");
+            throw new TallerMecanicoExcepcion("No se puede añadir precio del material, ya que el trabajo mecánico está cerrado.");
         }
         precioMaterial += cantidad;
     }
@@ -39,6 +39,11 @@ public class Mecanico extends Trabajo {
 
     @Override
     public String toString() {
-        return String.format("[precioMaterial=%s, cliente=%s, vehiculo=%s, fechaInicio=%s, fechaFin=%s, horas=%s]", precioMaterial, cliente, vehiculo, fechaInicio, fechaFin, horas);
+        if (!estaCerrado()) {
+            return String.format("Mecánico -> %s - %s (%s - ): %s horas, %.2f € en material", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA),  horas, precioMaterial);
+        } else {
+            return String.format("Mecánico -> %s - %s (%s - %s): %s horas, %.2f € en material, %.2f € total", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA),fechaFin.format((FORMATO_FECHA)), horas, precioMaterial, getPrecio());
+
+        }
     }
 }
