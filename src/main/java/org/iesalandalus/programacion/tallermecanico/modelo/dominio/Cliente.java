@@ -18,7 +18,7 @@ public class Cliente {
     }
 
     public Cliente(Cliente cliente1) {
-        Objects.requireNonNull(cliente1, "El cliente no puede ser nulo.");
+        Objects.requireNonNull(cliente1, "No es posible copiar un cliente nulo.");
         this.nombre = cliente1.nombre;
         this.dni = cliente1.dni;
         this.telefono = cliente1.telefono;

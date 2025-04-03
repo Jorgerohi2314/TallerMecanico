@@ -1,9 +1,8 @@
 package org.iesalandalus.programacion.tallermecanico.modelo;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.*;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria.Clientes;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria.Trabajos;
+import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ITrabajos;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria.Vehiculos;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -40,7 +39,7 @@ class ModeloTest {
     private MockedConstruction<Vehiculos> controladorCreacionMockVehiculos;
     private MockedConstruction<Revision> controladorCreacionMockRevision;
     private MockedConstruction<Mecanico> controladorCreacionMockMecanico;
-    private MockedConstruction<Trabajos> controladorCreacionMockTrabajos;
+    private MockedConstruction<ITrabajos> controladorCreacionMockTrabajos;
 
 
     @BeforeAll
@@ -70,7 +69,7 @@ class ModeloTest {
         controladorCreacionMockVehiculos = mockConstruction(Vehiculos.class);
         controladorCreacionMockRevision = mockConstruction(Revision.class);
         controladorCreacionMockMecanico = mockConstruction(Mecanico.class);
-        controladorCreacionMockTrabajos = mockConstruction(Trabajos.class);
+        controladorCreacionMockTrabajos = mockConstruction(ITrabajos.class);
         procesadorAnotaciones = MockitoAnnotations.openMocks(this);
     }
 

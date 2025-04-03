@@ -2,7 +2,6 @@ package org.iesalandalus.programacion.tallermecanico.modelo.negocio;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria.Trabajos;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class TrabajosTest {
+class ITrabajosTest {
 
     private static Revision revision;
     private static Mecanico mecanico;
@@ -47,7 +46,7 @@ class TrabajosTest {
 
     @BeforeEach
     void init() {
-        trabajos = new Trabajos();
+        trabajos = new ITrabajos();
         revision = mock();
         when(revision.getCliente()).thenReturn(cliente1);
         when(revision.getVehiculo()).thenReturn(vehiculo1);
