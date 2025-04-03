@@ -147,3 +147,5 @@ public abstract class Trabajo {
         return Objects.hash(cliente, vehiculo, fechaInicio);
     }
 }
+
+
