@@ -3,17 +3,16 @@ package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 import java.util.Objects;
 
 public record Vehiculo(String marca, String modelo, String matricula) {
-    private static final String ER_MARCA = "[A-ZÁÉÍÓÚÜ]+[a-záéíóúü]*[ |-]?[A-ZÁÉÍÓÚÜ]?[a-záéíóúü]*";
-    private static final String ER_MATRICULA = "\\d{4}[B-Z(^EIOU)]{3}";
-
+    private static final String ER_MARCA = "([A-ZÁÉÍÓÚ]+[a-záéíóú]*[A-ZÁÉÍÓÚ]?[a-záéíóú]*)([ -][A-ZÁÉÍÓÚ][a-záéíóú]*)?";
+    private static final String ER_MATRICULA = "\\d{4}[^\\W_AEIOUa-z]{3}";
 
     public Vehiculo {
-        validadMarca(marca);
+        validarMarca(marca);
         validarMatricula(matricula);
         validarModelo(modelo);
     }
 
-    private void validadMarca(String marca) {
+    private void validarMarca(String marca) {
         Objects.requireNonNull(marca, "La marca no puede ser nula.");
         if (!marca.matches(ER_MARCA)) {
             throw new IllegalArgumentException("La marca no tiene un formato válido.");
@@ -22,7 +21,7 @@ public record Vehiculo(String marca, String modelo, String matricula) {
 
     private void validarModelo(String modelo) {
         Objects.requireNonNull(modelo, "El modelo no puede ser nulo.");
-        if (modelo.trim().isEmpty()) {
+        if (modelo.isBlank()) {
             throw new IllegalArgumentException("El modelo no puede estar en blanco.");
         }
     }
@@ -35,13 +34,13 @@ public record Vehiculo(String marca, String modelo, String matricula) {
     }
 
     public static Vehiculo get(String matricula) {
-        return new Vehiculo("Audi", "A4", matricula);
+        return new Vehiculo("Ford", "mondeo", matricula);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Vehiculo vehiculo)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehiculo vehiculo = (Vehiculo) o;
         return Objects.equals(matricula, vehiculo.matricula);
     }
 
